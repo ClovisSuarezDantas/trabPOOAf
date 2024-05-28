@@ -9,6 +9,7 @@ Este é um sistema de pagamento simples implementado em Java, utilizando Maven. 
 - **service**
   - `Notificacao.java`: Interface para notificação.
   - `Pagamento.java`: Interface para diferentes tipos de pagamento.
+  - `PagamentoParcelado.java`: Implementação da interface de pagamento para pagamentos parcelados.
   - `PagamentoTaxa.java`: Interface para pagamentos com taxa.
 - **service.impl**
   - `Logger.java`: Classe responsável pelo registro de logs.
@@ -16,7 +17,6 @@ Este é um sistema de pagamento simples implementado em Java, utilizando Maven. 
   - `PagamentoBoleto.java`: Implementação da interface de pagamento para boletos.
   - `PagamentoCartao.java`: Implementação da interface de pagamento para cartões de crédito.
   - `PagamentoPIX.java`: Implementação da interface de pagamento para PIX.
-  - `PagamentoParcelado.java`: Implementação da interface de pagamento para pagamentos parcelados.
 
 ## Funcionalidades
 
