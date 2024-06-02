@@ -1,13 +1,13 @@
 package domain;
 
-import service.Notificacao;
-import service.Pagamento;
-import service.impl.NotificacaoConsole;
-import service.impl.PagamentoBoleto;
-import service.impl.PagamentoCartao;
-import service.impl.PagamentoPIX;
-
 import java.util.Scanner;
+
+import service.Notificacao;
+import service.PagamentoService;
+import service.factory.PagamentoBoletoFactory;
+import service.factory.PagamentoCartaoFactory;
+import service.factory.PagamentoPIXFactory;
+import service.impl.NotificacaoConsole;
 
 /**
  * Classe principal responsável pelo sistema de pagamento.
@@ -21,7 +21,7 @@ public class SistemaPagamento {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Notificacao notificacao = new NotificacaoConsole();
-        Pagamento pagamento = null;
+        PagamentoService pagamentoService = null;
 
         System.out.println("Escolha a forma de pagamento:");
         System.out.println("1. Boleto");
@@ -32,26 +32,28 @@ public class SistemaPagamento {
 
         switch (opcao) {
             case 1:
-                pagamento = new PagamentoBoleto();
+                pagamentoService = new PagamentoService(new PagamentoBoletoFactory());
                 break;
             case 2:
                 System.out.println("Digite o número de parcelas:");
                 int parcelas = scanner.nextInt();
-                pagamento = new PagamentoCartao(parcelas);
+                pagamentoService = new PagamentoService(new PagamentoCartaoFactory(parcelas));
                 break;
             case 3:
-                pagamento = new PagamentoPIX();
+                pagamentoService = new PagamentoService(new PagamentoPIXFactory());
                 break;
             default:
                 System.out.println("Opção inválida!");
-                return;
+                break;
         }
 
         System.out.println("Digite o valor do pagamento:");
         double valor = scanner.nextDouble();
 
-        if (pagamento != null) {
-            pagamento.pagar(valor, notificacao);
+        if (pagamentoService != null) {
+            pagamentoService.novoPagamento(valor, notificacao);
         }
+
+        scanner.close();
     }
 }
