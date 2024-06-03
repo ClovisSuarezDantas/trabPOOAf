@@ -1,7 +1,6 @@
-package service.impl;
+package service;
 
-import service.Notificacao;
-import service.Pagamento;
+import service.impl.Logger;
 
 /**
  * Classe responsável pelo pagamento parcelado
